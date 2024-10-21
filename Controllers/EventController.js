@@ -12,6 +12,14 @@ export const createEvent = async (req, res) => {
     res.status(500).json(error);
   }
 };
+export const getAllEvent = async (req, res) => {
+  try {
+    const events = await EventModel.find({});
+    res.status(200).json(events);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 
 // Get a Event
 
