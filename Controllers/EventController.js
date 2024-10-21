@@ -12,6 +12,26 @@ export const createEvent = async (req, res) => {
     res.status(500).json(error);
   }
 };
+export const registerEvent = async (req, res) => {
+  const id = req.body.id;
+  console.log(id);
+
+  try {
+    const updatedEvent = await EventModel.findByIdAndUpdate(
+      id,
+      { $inc: { registrations: 1 } },
+      { new: true }
+    );
+    if (updatedEvent) {
+      console.log("Successfully registered for the event:", updatedEvent);
+    } else {
+      console.log("Event not found");
+    }
+    res.status(200).json(newEvent);
+  } catch (error) {
+    res.status(500).json(error);
+  }
+};
 export const getAllEvent = async (req, res) => {
   try {
     const events = await EventModel.find({});
